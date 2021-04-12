@@ -15,7 +15,7 @@ export default function FirstPost () {
       <div >
         <div className={styles.x}>content</div>
       </div>
-      <img src={png} alt=""/>
+      <img className={styles.img} src={png} alt=""/>
     </div>
   )
 }
