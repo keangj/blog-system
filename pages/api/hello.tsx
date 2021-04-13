@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import {NextApiHandler, NextApiRequest, NextApiResponse} from "next";
 import {getPosts} from "../../lib/posts";
-
-const Posts: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+// const Posts = async (req: NextApiRequest, res: NextApiResponse) => {
+const Posts: NextApiHandler = async (req, res) => {
   const posts = await getPosts()
   console.log(posts);
   res.statusCode = 200
