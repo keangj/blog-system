@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { usePosts } from "hooks/usePosts";
 import { getPosts } from "lib/posts";
+import Link from "next/link";
 
 // const PostsIndex: NextPage = () => {
 //   const { posts } = usePosts();
@@ -21,7 +22,16 @@ const PostsIndex: NextPage<Props> = (props) => {
   return (
     <div>
       <h1>list</h1>
-      {posts.map(p => <div key={p.id}>{p.id}</div>)}
+      {posts.map(p => 
+        <div key={p.id}>
+          {/* <Link href={`/posts/${p.id}`}>
+            <a>{p.id}</a>
+          </Link> */}
+          <Link href="/posts/[id]" as={`/posts/${p.id}`}>
+              <a>{p.title}</a>
+          </Link>
+        </div>
+      )}
     </div>
   )
 };

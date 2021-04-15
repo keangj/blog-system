@@ -108,6 +108,11 @@
   resolved "http://47.96.89.84:8181/repository/npm-group/@types/json-schema/-/json-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
   integrity sha1-mKmTUWyFnrDVxMjwmDF6nqaNua0=
 
+"@types/marked@^2.0.2":
+  version "2.0.2"
+  resolved "http://47.96.89.84:8181/repository/npm-group/@types/marked/-/marked-2.0.2.tgz#33a15106383f6e42cd6bdd38093e6b19904e29e1"
+  integrity sha1-M6FRBjg/bkLNa904CT5rGZBOKeE=
+
 "@types/node@*", "@types/node@^14.14.37":
   version "14.14.37"
   resolved "http://47.96.89.84:8181/repository/npm-group/@types/node/-/node-14.14.37.tgz#a3dd8da4eb84a996c36e331df98d82abd76b516e"
@@ -1190,6 +1195,11 @@ make-dir@^3.0.2:
   integrity sha1-QV6WcEazp/HRhSd9hKpYIDcmoT8=
   dependencies:
     semver "^6.0.0"
+
+marked@^2.0.3:
+  version "2.0.3"
+  resolved "http://47.96.89.84:8181/repository/npm-group/marked/-/marked-2.0.3.tgz#3551c4958c4da36897bda2a16812ef1399c8d6b0"
+  integrity sha1-NVHElYxNo2iXvaKhaBLvE5nI1rA=
 
 md5.js@^1.3.4:
   version "1.3.5"
