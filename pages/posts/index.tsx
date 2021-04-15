@@ -29,6 +29,7 @@ const PostsIndex: NextPage<Props> = (props) => {
 export default PostsIndex;
 
 export const getStaticProps = async () => {
+  // 开发环境，每次请求到来后运行。生产环境，build 时运行
   const posts = await getPosts();
   return {
     props: { posts: JSON.parse(JSON.stringify(posts)) }

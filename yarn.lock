@@ -139,6 +139,11 @@
   resolved "http://47.96.89.84:8181/repository/npm-group/@types/scheduler/-/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha1-GIRSBehv8AOFF6q3oYpiprn3EnU=
 
+"@types/ua-parser-js@^0.7.35":
+  version "0.7.35"
+  resolved "http://47.96.89.84:8181/repository/npm-group/@types/ua-parser-js/-/ua-parser-js-0.7.35.tgz#cca67a95deb9165e4b1f449471801e6489d3fe93"
+  integrity sha1-zKZ6ld65Fl5LH0SUcYAeZInT/pM=
+
 ajv-keywords@^3.5.2:
   version "3.5.2"
   resolved "http://47.96.89.84:8181/repository/npm-group/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
@@ -1983,6 +1988,11 @@ typescript@^4.2.4:
   version "4.2.4"
   resolved "http://47.96.89.84:8181/repository/npm-group/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
   integrity sha1-hhC1l0feAo/aiYqK7w4QPxVtCWE=
+
+ua-parser-js@^0.7.28:
+  version "0.7.28"
+  resolved "http://47.96.89.84:8181/repository/npm-group/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
+  integrity sha1-i6BOZT81ziECOcZGYWhb+RId7DE=
 
 unbox-primitive@^1.0.0:
   version "1.0.1"
