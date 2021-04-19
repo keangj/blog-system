@@ -5,7 +5,7 @@
     "noImplicitAny": true, // 禁止隐式 any
     "target": "es5",
     "module": "esnext",
-    "strict": true,
+    "strict": false,
     "baseUrl": "./",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

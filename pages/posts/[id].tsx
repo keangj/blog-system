@@ -20,7 +20,7 @@ export default postsShow;
 export const getStaticPaths = async () => {
   const idList = await getPostIds();
   return {
-    paths: idList.map(id => ({ params: { id } })),
+    paths: idList.map((id: string) => ({ params: { id } })),
     fallback: false
   }
 }
