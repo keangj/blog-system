@@ -8,4 +8,8 @@ export class Post {
   title: string;
   @Column('text')
   content: string;
+  // Partial 可传部分属性
+  constructor(attributes: Partial<Post>) {
+    Object.assign(this, attributes);
+  }
 }
