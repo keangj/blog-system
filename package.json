@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"babel -w ./src --out-dir dist --extensions .ts,.tsx\"",
     "build": "next build",
     "start": "next start",
-    "typeorm:build": "babel -w ./src --out-dir dist --extensions .ts,.tsx",
-    "migration:create": "typeorm migration:create",
-    "migration:run": "typeorm migration:run",
-    "migration:revert": "typeorm migration:revert",
+    "m:create": "typeorm migration:create",
+    "m:run": "typeorm migration:run",
+    "m:revert": "typeorm migration:revert",
     "entity:create": "typeorm entity:create"
   },
   "dependencies": {
@@ -33,6 +32,7 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/ua-parser-js": "^0.7.35",
+    "concurrently": "^6.0.2",
     "file-loader": "^6.2.0",
     "next-images": "^1.7.0",
     "sass": "^1.32.8",
