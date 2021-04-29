@@ -4,6 +4,7 @@ import png from 'assets/images/123.jpg'
 import { GetServerSideProps, NextPage } from 'next'
 import UAParser from 'ua-parser-js'
 import { useEffect, useState } from 'react'
+import { getDatabaseConnection } from 'lib/getDatabaseConnection'
 
 type props = {
   browser: {
@@ -38,6 +39,8 @@ type props = {
 export default index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const connect = await getDatabaseConnection();
+  console.log('connect');
   // 请求到来之后运行, 无法获取客户端信息
   const ua = context.req.headers['user-agent'];
   const result = new UAParser(ua).getResult();
