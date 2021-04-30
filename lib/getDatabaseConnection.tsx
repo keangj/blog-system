@@ -20,7 +20,8 @@ const promise = (async function () {
   } else {
     const current = manager.get('default');
     if (current.isConnected) {
-      return current;
+      current.close();
+      return create();
     } else {
       return create();
     }
