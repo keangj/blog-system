@@ -15,17 +15,11 @@ const create = async () => {
 
 const promise = (async function () {
   const manager = getConnectionManager();
-  if (!manager.has('default')) {
-    return create();
-  } else {
-    const current = manager.get('default');
-    if (current.isConnected) {
-      current.close();
-      return create();
-    } else {
-      return create();
-    }
+  const current = manager.has('default') && manager.get('default');
+  if (current) {
+    await current.close();
   }
+  return create();
 })();
 export const getDatabaseConnection = async () => {
   return promise;

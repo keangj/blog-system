@@ -24,6 +24,7 @@ type props = {
       <h1>title</h1>
       <p>{props.browser.name}</p>
       <p>{width}</p>
+      <p></p>
 
       <style jsx>
         {`
@@ -50,7 +51,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       browser: result.browser,
-      posts
+      posts: JSON.parse(JSON.stringify(posts))
     }
   }
 }
