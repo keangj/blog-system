@@ -10,10 +10,12 @@ import { Post } from 'src/entity/Post'
 type props = {
   browser: {
     name: string;
-  }
+  },
+  posts: Post[]
 }
 
  const index:NextPage<props> = (props) => {
+  const { posts } = props;
   const [width, setWidth] = useState(0);
   useEffect(() => {
     const w = document.documentElement.clientWidth;
@@ -24,7 +26,7 @@ type props = {
       <h1>title</h1>
       <p>{props.browser.name}</p>
       <p>{width}</p>
-      <p></p>
+      {posts.map(post => <div key={post.id}>{post.title}</div>)}
 
       <style jsx>
         {`
