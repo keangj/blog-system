@@ -26,7 +26,7 @@ type props = {
       <h1>title</h1>
       <p>{props.browser.name}</p>
       <p>{width}</p>
-      {posts.map(post => <div key={post.id}>{post.title}</div>)}
+      {posts.map(post => <Link key={post.id} href="/posts/[id]" as={`/posts/${post.id}`}>{post.title}</Link>)}
 
       <style jsx>
         {`

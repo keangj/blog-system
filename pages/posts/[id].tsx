@@ -1,33 +1,29 @@
+import { getDatabaseConnection } from "lib/getDatabaseConnection";
 import { getPost, getPostIds } from "lib/posts";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import { Post } from "src/entity/Post";
 
 type props = {
   post: Post;
 }
 const postsShow: NextPage<props> = (props) => {
-  const { title, date, htmlContent } = props.post
+  const { title, content } = props.post
+  console.log(props);
   return (
     <div>
       <h1>{title}</h1>
-      <div>{date}</div>
-      <article dangerouslySetInnerHTML={{ __html: htmlContent }}></article>
+      <article dangerouslySetInnerHTML={{ __html: content }}></article>
     </div>
   )
 }
 
 export default postsShow;
 
-export const getStaticPaths = async () => {
-  const idList = await getPostIds();
-  return {
-    paths: idList.map((id: string) => ({ params: { id } })),
-    fallback: false
-  }
-}
-
-export const getStaticProps = async (x: any) => {
-  const id = x.params.id
-  const post = await getPost(id);
+export const getServerSideProps: GetServerSideProps<any, {id: string}> = async (context) => {
+  const { id } = context.params
+  const connection = await getDatabaseConnection();
+  const post = await connection.manager.findOne(Post, id);
+  // 请求到来之后运行, 无法获取客户端信息
   return {
     props: {
       post: JSON.parse(JSON.stringify(post))
