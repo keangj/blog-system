@@ -5,6 +5,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import UAParser from 'ua-parser-js'
 import { useEffect, useState } from 'react'
 import { getDatabaseConnection } from 'lib/getDatabaseConnection'
+import { Post } from 'src/entity/Post'
 
 type props = {
   browser: {
@@ -39,14 +40,17 @@ type props = {
 export default index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const connect = await getDatabaseConnection();
-  console.log('connect');
+  const connection = await getDatabaseConnection();
+  console.log('connection');
+  const posts = await connection.manager.find(Post);
+  console.log(posts);
   // 请求到来之后运行, 无法获取客户端信息
   const ua = context.req.headers['user-agent'];
   const result = new UAParser(ua).getResult();
   return {
     props: {
-      browser: result.browser
+      browser: result.browser,
+      posts
     }
   }
 }

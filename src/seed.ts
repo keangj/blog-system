@@ -1,7 +1,7 @@
+import "reflect-metadata";
 import { Post } from './entity/Post';
 import { User } from './entity/User';
 import { Comment } from './entity/Comment';
-import "reflect-metadata";
 import { createConnection } from "typeorm";
 
 createConnection().then(async connection => {
@@ -23,6 +23,6 @@ createConnection().then(async connection => {
   commit1.post = post1;
   commit1.content = 'hello world!';
   await manager.save(commit1);
-  
+
   connection.close();
 }).catch(error => console.log(error));
