@@ -4,12 +4,12 @@ import { useCallback, useState } from "react";
 
 const PostsIndex: NextPage = (props) => {
   const [formData, setFormData] = useState({
-    userName: '',
+    username: '',
     password: '',
     passwordConfirmation: ''
   });
   const [errors, setErrors] = useState({
-    userName: [],
+    username: [],
     password: [],
     passwordConfirmation: []
   });
@@ -32,9 +32,9 @@ const PostsIndex: NextPage = (props) => {
       {JSON.stringify(errors)}
       <form onSubmit={onSubmit}>
         <label>账户
-          <input type="text" value={formData.userName} onChange={e => setFormData({...formData, userName: e.target.value})}/>
+          <input type="text" value={formData.username} onChange={e => setFormData({...formData, username: e.target.value})}/>
         </label>
-        {errors.userName?.length > 0 && <div>{errors.userName.join()}</div>}
+        {errors.username?.length > 0 && <div>{errors.username.join()}</div>}
         <label>输入密码
           <input type="password" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})}/>
         </label>
