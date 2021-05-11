@@ -1,4 +1,3 @@
-import md5 from "md5";
 import { getDatabaseConnection } from "lib/getDatabaseConnection";
 import { NextApiHandler } from "next";
 import { User } from "src/entity/User";
