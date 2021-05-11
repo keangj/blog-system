@@ -15,8 +15,8 @@ const PostsIndex: NextPage = (props) => {
   });
   const onSubmit = useCallback((e) => {
     e.preventDefault();
-    axios.post(`api/v1/user`, formData).then(resource => {
-      window.location.href = '/sign_in';
+    axios.post(`api/v1/sessions`, formData).then(resource => {
+      console.log(resource);
     }, error => {
       console.log(error.response);
       if (error.response) {
@@ -27,7 +27,7 @@ const PostsIndex: NextPage = (props) => {
   }, [formData]);
   return (
     <div>
-      <h1>注册</h1>
+      <h1>登录</h1>
       <form onSubmit={onSubmit}>
         <label>账户
           <input type="text" value={formData.username} onChange={e => setFormData({...formData, username: e.target.value})}/>
@@ -37,11 +37,7 @@ const PostsIndex: NextPage = (props) => {
           <input type="password" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})}/>
         </label>
         {errors.password?.length > 0 && <div>{errors.password.join()}</div>}
-        <label>确认密码
-          <input type="password" value={formData.passwordConfirmation} onChange={e => setFormData({...formData, passwordConfirmation: e.target.value})}/>
-        </label>
-        {errors.passwordConfirmation?.length > 0 && <div>{errors.passwordConfirmation.join()}</div>}
-        <button type="submit" onSubmit={onSubmit}>注册</button>
+        <button type="submit" onSubmit={onSubmit}>登录</button>
       </form>
     </div>
   )
