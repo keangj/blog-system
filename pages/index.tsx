@@ -7,14 +7,14 @@ import { useEffect, useState } from 'react'
 import { getDatabaseConnection } from 'lib/getDatabaseConnection'
 import { Post } from 'src/entity/Post'
 
-type props = {
+type Props = {
   browser: {
     name: string;
   },
   posts: Post[]
 }
 
- const index:NextPage<props> = (props) => {
+ const index:NextPage<Props> = (props) => {
   const { posts } = props;
   const [width, setWidth] = useState(0);
   useEffect(() => {

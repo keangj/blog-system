@@ -1,8 +1,15 @@
 import axios, { AxiosResponse } from "axios";
-import { NextPage } from "next";
+import { withSession } from "lib/withSession";
+import { GetServerSideProps, NextPage } from "next";
 import { useCallback, useState } from "react";
+import { User } from "src/entity/User";
 
-const PostsIndex: NextPage = (props) => {
+type Props = {
+  user: User;
+}
+
+const SignIn: NextPage<Props> = (props) => {
+  console.log(props.user);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -43,4 +50,15 @@ const PostsIndex: NextPage = (props) => {
   )
 };
 
-export default PostsIndex;
+export default SignIn;
+
+// @ts-ignore
+export const getServerSideProps: GetServerSideProps = withSession(async (context) => {
+  // @ts-ignore
+  const user = context.req.session.get('currentUser');
+  return {
+    props: {
+      user: JSON.parse(JSON.stringify(user))
+    }
+  }
+})

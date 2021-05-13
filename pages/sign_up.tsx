@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { NextPage } from "next";
 import { useCallback, useState } from "react";
 
-const PostsIndex: NextPage = (props) => {
+const SignUp: NextPage = (props) => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -47,4 +47,4 @@ const PostsIndex: NextPage = (props) => {
   )
 };
 
-export default PostsIndex;
+export default SignUp;
