@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { withSession } from "lib/withSession";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import { useCallback, useState } from "react";
 import { User } from "src/entity/User";
 
@@ -52,8 +52,8 @@ const SignIn: NextPage<Props> = (props) => {
 
 export default SignIn;
 
-// @ts-ignore
-export const getServerSideProps: GetServerSideProps = withSession(async (context) => {
+
+export const getServerSideProps: GetServerSideProps = withSession(async (context: GetServerSidePropsContext) => {
   // @ts-ignore
   const user = context.req.session.get('currentUser');
   return {
