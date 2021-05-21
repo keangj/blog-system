@@ -2,7 +2,6 @@ import axios, { AxiosResponse } from "axios";
 import { useForm } from "hooks/useForm";
 import { withSession } from "lib/withSession";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
-import { useCallback, useState } from "react";
 import { User } from "src/entity/User";
 
 type Props = {
@@ -11,16 +10,6 @@ type Props = {
 
 const SignIn: NextPage<Props> = (props) => {
   // console.log(props.user);
-  // const [formData, setFormData] = useState({
-  //   username: '',
-  //   password: '',
-  //   passwordConfirmation: ''
-  // });
-  // const [errors, setErrors] = useState({
-  //   username: [],
-  //   password: [],
-  //   passwordConfirmation: []
-  // });
   const onSubmit = (formData: typeof initFormData) => {
     axios.post(`api/v1/sessions`, formData).then(resource => {
       console.log(resource);
@@ -36,19 +25,14 @@ const SignIn: NextPage<Props> = (props) => {
   const {form, setErrors} = useForm({
     initFormData,
     fields: [
-      {
-        label: '账户', type: 'text', key: 'username'
-      }, {
-        label: '密码', type: 'password', key: 'password'
-      }
+      { label: '账户', type: 'text', key: 'username' }, 
+      { label: '密码', type: 'password', key: 'password' }
     ],
     onSubmit,
     buttons: <button type="submit">登录</button>
   })
   return (
-    <div>
-      {form}
-    </div>
+    <div>{form}</div>
   )
 };
 
