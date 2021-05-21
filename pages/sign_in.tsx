@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { useForm } from "hooks/useForm";
 import { withSession } from "lib/withSession";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import { useCallback, useState } from "react";
@@ -9,43 +10,44 @@ type Props = {
 }
 
 const SignIn: NextPage<Props> = (props) => {
-  console.log(props.user);
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    passwordConfirmation: ''
-  });
-  const [errors, setErrors] = useState({
-    username: [],
-    password: [],
-    passwordConfirmation: []
-  });
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
+  // console.log(props.user);
+  // const [formData, setFormData] = useState({
+  //   username: '',
+  //   password: '',
+  //   passwordConfirmation: ''
+  // });
+  // const [errors, setErrors] = useState({
+  //   username: [],
+  //   password: [],
+  //   passwordConfirmation: []
+  // });
+  const onSubmit = (formData: typeof initFormData) => {
     axios.post(`api/v1/sessions`, formData).then(resource => {
       console.log(resource);
     }, error => {
       console.log(error.response);
       if (error.response) {
         const response: AxiosResponse = error.response;
-        setErrors({...response.data});
+        setErrors(response.data)
       }
     });
-  }, [formData]);
+  }
+  const initFormData = {username: '', password: ''}
+  const {form, setErrors} = useForm({
+    initFormData,
+    fields: [
+      {
+        label: '账户', type: 'text', key: 'username'
+      }, {
+        label: '密码', type: 'password', key: 'password'
+      }
+    ],
+    onSubmit,
+    buttons: <button type="submit">登录</button>
+  })
   return (
     <div>
-      <h1>登录</h1>
-      <form onSubmit={onSubmit}>
-        <label>账户
-          <input type="text" value={formData.username} onChange={e => setFormData({...formData, username: e.target.value})}/>
-        </label>
-        {errors.username?.length > 0 && <div>{errors.username.join()}</div>}
-        <label>输入密码
-          <input type="password" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})}/>
-        </label>
-        {errors.password?.length > 0 && <div>{errors.password.join()}</div>}
-        <button type="submit" onSubmit={onSubmit}>登录</button>
-      </form>
+      {form}
     </div>
   )
 };
