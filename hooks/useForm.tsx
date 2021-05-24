@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { ReactChild, useCallback, useState } from "react";
 
 type Field<T> = {
@@ -8,12 +9,15 @@ type Field<T> = {
 type UseFormOptions<T> = {
   initFormData: T;
   fields: Field<T>[];
-  onSubmit: (formData: T) => void;
+  submit: {
+    request: (formData: T) => Promise<AxiosResponse<T>>,
+    message: string
+  }
   buttons: ReactChild
 }
 
 export function useForm<T> (useFormOptions: UseFormOptions<T>) {
-  const { initFormData, fields, onSubmit, buttons } = useFormOptions;
+  const { initFormData, fields, submit, buttons } = useFormOptions;
   const [formData, setFormData] = useState(initFormData);
   const [errors, setErrors] = useState(() => {
     const e: { [k in keyof T]?: string[] } = {};
@@ -29,8 +33,16 @@ export function useForm<T> (useFormOptions: UseFormOptions<T>) {
   }, [formData])
   const _onSubmit = useCallback((e) => {
     e.preventDefault();
-    onSubmit(formData);
-  }, [onSubmit, formData])
+    submit.request(formData).then(resource => {
+      console.log(resource);
+    }, error => {
+      console.log(error.response);
+      if (error.response) {
+        const response: AxiosResponse = error.response;
+        setErrors(response.data)
+      }
+    })
+  }, [submit, formData])
   const form = (
     <form onSubmit={_onSubmit}>
       {fields.map((field, key) => 
@@ -38,7 +50,7 @@ export function useForm<T> (useFormOptions: UseFormOptions<T>) {
           <label>
             {field.label}
             {field.type === 'textarea' ?
-              <textarea onChange={e => onChange(field.key, e.target.value)}>formData[field.key]</textarea> :
+              <textarea onChange={e => onChange(field.key, e.target.value)} value={formData[field.key].toString()}/> :
               <input type={field.type} value={formData[field.key].toString()} onChange={e => onChange(field.key, e.target.value)}/>
             }
           </label>
@@ -49,6 +61,6 @@ export function useForm<T> (useFormOptions: UseFormOptions<T>) {
       <div>{buttons}</div>
     </form>
   )
-  return { form, setErrors };
+  return { form };
 
 }
