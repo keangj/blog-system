@@ -13,7 +13,7 @@ const SignUp: NextPage = (props) => {
     ],
     submit: {
       request: (formData) => axios.post(`/api/v1/user`, formData),
-      message: '注册成功'
+      success: () => {}
     },
     buttons: <button type="submit">注册</button>
   })

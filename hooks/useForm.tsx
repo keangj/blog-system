@@ -11,7 +11,7 @@ type UseFormOptions<T> = {
   fields: Field<T>[];
   submit: {
     request: (formData: T) => Promise<AxiosResponse<T>>,
-    message: string
+    success: (resource: any) => void
   }
   buttons: ReactChild
 }
@@ -34,12 +34,17 @@ export function useForm<T> (useFormOptions: UseFormOptions<T>) {
   const _onSubmit = useCallback((e) => {
     e.preventDefault();
     submit.request(formData).then(resource => {
-      console.log(resource);
+      submit.success(resource);
     }, error => {
       console.log(error.response);
       if (error.response) {
         const response: AxiosResponse = error.response;
-        setErrors(response.data)
+        if (response.status === 422) {
+          setErrors(response.data)
+        } else if (response.status === 401) {
+          console.log('请登录');
+          window.location.href = `/sign_in?return_to=${encodeURIComponent(window.location.pathname)}`
+        }
       }
     })
   }, [submit, formData])

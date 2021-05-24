@@ -6,6 +6,11 @@ import { Post } from "src/entity/Post";
 const Posts: NextApiHandler = withSession(async (req, res) => {
   const connection = await getDatabaseConnection();
   const user = req.session.get('currentUser');
+  if (!user) {
+    res.statusCode = 401;
+    res.end();
+    return;
+  }
   if (req.method === 'POST') {
     const { title, content } = req.body;
     const post = new Post();
