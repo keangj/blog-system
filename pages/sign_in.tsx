@@ -3,7 +3,7 @@ import { useForm } from "hooks/useForm";
 import { withSession } from "lib/withSession";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import { User } from "src/entity/User";
-import qs from 'query-string';
+import qs from 'querystring';
 
 type Props = {
   user: User;
@@ -21,7 +21,7 @@ const SignIn: NextPage<Props> = (props) => {
     submit: {
       request: (formData) => axios.post(`/api/v1/sessions`, formData),
       success: () => {
-        const query = qs.parse(window.location.search);
+        const query = qs.parse(window.location.search.substr(1));
         window.location.href = query.return_to.toString();
       }
     },

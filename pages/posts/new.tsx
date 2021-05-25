@@ -13,7 +13,10 @@ const PostsNew: NextPage = (props) => {
     ],
     submit: {
       request: (formData) => axios.post(`/api/v1/posts`, formData),
-      success: () => {}
+      success: (resource) => {
+        console.log(resource);
+        window.location.href = '/posts'
+      }
     },
     buttons: <button type="submit">提交</button>
   })
