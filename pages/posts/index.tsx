@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { getDatabaseConnection } from 'lib/getDatabaseConnection'
 import { Post } from 'src/entity/Post'
 import qs from 'querystring';
+import { usePagination } from 'hooks/usePagination'
 
 type Props = {
   browser: {
@@ -24,6 +25,9 @@ type Props = {
     const w = document.documentElement.clientWidth;
     setWidth(w);
   })
+  const pagination = usePagination({
+    page, totalPage
+  })
   return (
     <div>
       <h1>title</h1>
@@ -35,9 +39,7 @@ type Props = {
         </div>
       )}
       <footer>
-        共{count}篇文章，当前第 {page}/{totalPage} 页, 每页{pageSize}篇文章
-        {page > 1 && <Link href={`/posts?page=${page - 1}`}><a>上一页</a></Link>}|
-        {page < totalPage && <Link href={`/posts?page=${page + 1}`}><a>下一页</a></Link>}
+        {pagination}
       </footer>
       <style jsx>
         {`
@@ -57,8 +59,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const index = context.req.url.indexOf('?');
   const search = context.req.url.substr(index + 1);
   const query = qs.parse(search);
-  const page = Number.parseInt(query.page.toString());
-  const pageSize = 2
+  const page = Number.parseInt(query.page?.toString()) || 1;
+  const pageSize = 1
   const connection = await getDatabaseConnection();
   const [posts, count] = await connection.manager.findAndCount(Post, {
     skip: (page - 1) * pageSize, take: pageSize
