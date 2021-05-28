@@ -4,11 +4,15 @@ import Link from "next/link";
 type Options = {
   page: number;
   totalPage: number;
+  urlMaker?: (n: number) => string
 }
 
+const defaultUrlMaker = (n: number) => `?page=${n}`;
+
 export function usePagination (options: Options) {
-  const { page, totalPage } = options;
+  const { page, totalPage, urlMaker } = options;
   const number = [];
+  const _urlMaker = urlMaker || defaultUrlMaker;
   number.push(1);
   for (let i = page - 3; i <= page + 3; i++ ) {
     number.push(i)
@@ -19,17 +23,17 @@ export function usePagination (options: Options) {
   return (
     <div>
       第 {page}/{totalPage} 页
-      {page > 1 && <Link href={`/posts?page=${page - 1}`}><a>{'<'}</a></Link>}
+      {page > 1 && <Link href={_urlMaker(page - 1)}><a>{'<'}</a></Link>}
       {
         pageNumbers.map((n, index) =>
           <span key={index}>
             {n === -1 ?
             <span>···</span> :
-            <Link href={`/posts?page=${n}`}><a>{n}</a></Link>}
+            <Link href={_urlMaker(n)}><a>{n}</a></Link>}
           </span>
         )
       }
-      {page < totalPage && <Link href={`/posts?page=${page + 1}`}><a>{'>'}</a></Link>}
+      {page < totalPage && <Link href={_urlMaker(page + 1)}><a>{'>'}</a></Link>}
     </div>
   )
 } 
