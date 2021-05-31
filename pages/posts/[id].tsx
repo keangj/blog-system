@@ -8,7 +8,6 @@ type props = {
 }
 const postsShow: NextPage<props> = (props) => {
   const { title, content } = props.post
-  console.log(props);
   return (
     <div>
       <h1>{title}</h1>

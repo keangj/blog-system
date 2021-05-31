@@ -14,7 +14,6 @@ const PostsNew: NextPage = (props) => {
     submit: {
       request: (formData) => axios.post(`/api/v1/posts`, formData),
       success: (resource) => {
-        console.log(resource);
         window.location.href = '/posts'
       }
     },

@@ -3,7 +3,6 @@ import Head from 'next/head'
 import styles from 'styles/first-post.module.scss'
 import png from 'assets/images/123.jpg'
 
-console.log(png)
 export default function FirstPost () {
   return (
     <div>

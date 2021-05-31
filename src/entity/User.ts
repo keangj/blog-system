@@ -53,7 +53,6 @@ export class User {
     }
   }
   hasErrors () {
-    console.log(this.errors);
     return !!Object.values(this.errors).find(value => value.length > 0)
   }
 

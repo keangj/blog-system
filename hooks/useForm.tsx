@@ -36,13 +36,11 @@ export function useForm<T> (useFormOptions: UseFormOptions<T>) {
     submit.request(formData).then(resource => {
       submit.success(resource);
     }, error => {
-      console.log(error.response);
       if (error.response) {
         const response: AxiosResponse = error.response;
         if (response.status === 422) {
           setErrors(response.data)
         } else if (response.status === 401) {
-          console.log('请登录');
           window.location.href = `/sign_in?return_to=${encodeURIComponent(window.location.pathname)}`
         }
       }

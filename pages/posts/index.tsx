@@ -65,10 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const [posts, count] = await connection.manager.findAndCount(Post, {
     skip: (page - 1) * pageSize, take: pageSize
   });
-  console.log(posts, count);
 
-
-  console.log(qs.parse(context.req.url));
   // 请求到来之后运行, 无法获取客户端信息
   const ua = context.req.headers['user-agent'];
   const result = new UAParser(ua).getResult();
