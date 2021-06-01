@@ -48,3 +48,18 @@ node dist/seed.js
 ``` bash
 yarn dev
 ```
+
+## 部署
+
+``` bash
+mkdir blog-data
+docker run --network=host -v /home/blog/blog-data/:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+
+
+yarn install --production=false
+yarn build
+docker build . -t <your username>/node-web-app
+docker build . -t jay/node-web-app
+docker run -p 3000:3000 -d <your username>/node-web-app
+docker run --network=host -p 3000:3000 -d jay/node-web-app
+```
