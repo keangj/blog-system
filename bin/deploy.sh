@@ -1,8 +1,9 @@
 cd /home/ubuntu/app/ &&
 git pull &&
 yarn install --production=false &&
-git apply migrate.patch &&
+git apply migrate.patch;
 yarn build &&
+yarn compile &&
 yarn m:run &&
 git reset --hard HEAD &&
 docker build . -t jay/node-web-app &&
