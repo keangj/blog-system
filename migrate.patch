@@ -1,0 +1,28 @@
+diff --git a/src/entity/User.ts b/src/entity/User.ts
+index f55e265..6373383 100644
+--- a/src/entity/User.ts
++++ b/src/entity/User.ts
+@@ -1,7 +1,7 @@
+ import {BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+ import {Post} from './Post'
+ import {Comment} from './Comment'
+-import { getDatabaseConnection } from "lib/getDatabaseConnection";
++// import { getDatabaseConnection } from "lib/getDatabaseConnection";
+ import md5 from 'md5';
+ import _ from "lodash";
+ @Entity('users')
+@@ -41,10 +41,10 @@ export class User {
+       this.errors.username.push('太短');
+     }
+     // const connection = await getDatabaseConnection();
+-    const found = await (await getDatabaseConnection()).manager.find(User, { username: this.username })
+-    if (found.length > 0) {
+-      this.errors.username.push('账户已存在');
+-    }
++    // const found = await (await getDatabaseConnection()).manager.find(User, { username: this.username })
++    // if (found.length > 0) {
++    //   this.errors.username.push('账户已存在');
++    // }
+     if (this.password.trim() === '') {
+       this.errors.password.push('不能为空');
+     }
