@@ -64,8 +64,14 @@ docker run -p 3000:3000 -d <your username>/node-web-app
 docker run --network=host -p 3000:3000 -d jay/node-web-app
 ```
 
-本地远程执行脚本（需配置 ssh）
+本地远程执行脚本（需配置 ssh），并在服务器拉取代码
 
 ``` sh
 ssh aws 'sh /home/ubuntu/app/bin/deploy.sh'
+```
+
+把本地的脚本在远程执行，无需到服务器拉取代码
+
+``` sh
+ssh aws 'bash -s' < bin/deploy.sh
 ```
