@@ -63,3 +63,9 @@ docker build . -t jay/node-web-app
 docker run -p 3000:3000 -d <your username>/node-web-app
 docker run --network=host -p 3000:3000 -d jay/node-web-app
 ```
+
+本地远程执行脚本（需配置 ssh）
+
+``` sh
+ssh aws 'sh /home/ubuntu/app/bin/deploy.sh'
+```
