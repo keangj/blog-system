@@ -10,10 +10,19 @@ const postsShow: NextPage<props> = (props) => {
   const { title, content } = props.post
   return (
     <>
-      <div>
+      <div className="container">
         <h1>{title}</h1>
         <article className="markdown-body" dangerouslySetInnerHTML={{ __html: marked(content) }}></article>
       </div>
+      <style jsx>{`
+        .container {
+          margin: 100px auto;
+          width: 800px;
+          h1 {
+            text-align: center;
+          }
+        }
+      `}</style>
     </>
   )
 }
