@@ -31,8 +31,6 @@ type Props = {
   return (
     <div>
       <h1>list</h1>
-      <p>{props.browser.name}</p>
-      <p>{width}</p>
       {posts.map(post => 
         <div key={post.id}>
           <Link href="/posts/[id]" as={`/posts/${post.id}`}>{post.title}</Link>
@@ -60,18 +58,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const search = context.req.url.substr(index + 1);
   const query = qs.parse(search);
   const page = Number.parseInt(query.page?.toString()) || 1;
-  const pageSize = 1
+  const pageSize = 10
   const connection = await getDatabaseConnection();
   const [posts, count] = await connection.manager.findAndCount(Post, {
     skip: (page - 1) * pageSize, take: pageSize
   });
 
-  // 请求到来之后运行, 无法获取客户端信息
-  const ua = context.req.headers['user-agent'];
-  const result = new UAParser(ua).getResult();
   return {
     props: {
-      browser: result.browser,
       posts: JSON.parse(JSON.stringify(posts)),
       count,
       page,

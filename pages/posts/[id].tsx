@@ -1,5 +1,5 @@
 import { getDatabaseConnection } from "lib/getDatabaseConnection";
-import { getPost, getPostIds } from "lib/posts";
+import marked from "marked";
 import { GetServerSideProps, NextPage } from "next";
 import { Post } from "src/entity/Post";
 
@@ -9,10 +9,12 @@ type props = {
 const postsShow: NextPage<props> = (props) => {
   const { title, content } = props.post
   return (
-    <div>
-      <h1>{title}</h1>
-      <article dangerouslySetInnerHTML={{ __html: content }}></article>
-    </div>
+    <>
+      <div>
+        <h1>{title}</h1>
+        <article className="markdown-body" dangerouslySetInnerHTML={{ __html: marked(content) }}></article>
+      </div>
+    </>
   )
 }
 
