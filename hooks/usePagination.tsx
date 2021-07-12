@@ -7,11 +7,12 @@ type Options = {
   urlMaker?: (n: number) => string
 }
 
-const defaultUrlMaker = (n: number) => `?page=${n}`;
+const defaultUrlMaker = (n: number) => `/posts?page=${n}`;
 
 export function usePagination (options: Options) {
   const { page, totalPage, urlMaker } = options;
   const number = [];
+  console.log(defaultUrlMaker(page));
   const _urlMaker = urlMaker || defaultUrlMaker;
   number.push(1);
   for (let i = page - 3; i <= page + 3; i++ ) {
