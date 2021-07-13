@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 // import React from "react";
 import img from 'assets/images/123.jpg'
-// const undefund = 
+
 const Home: NextPage = () => {
   return (
     <>
